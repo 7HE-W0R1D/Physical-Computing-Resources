@@ -1,4 +1,5 @@
-# Resources for INFO 4320 / 5321
+# Resources for Physical Computing
+_For INFO 4320 / 5321, INFO 4940_
 
 Arduino simulation online: https://www.tinkercad.com/
 
