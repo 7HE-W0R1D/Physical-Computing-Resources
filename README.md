@@ -1,7 +1,7 @@
 # Resources for Physical Computing
-_For INFO 4320 / 5321, INFO 4940_
+_For Cornell University INFO 4320 / 5321, INFO 4940_
 
-**[My Intro to Arduino Slide](https://docs.google.com/presentation/d/1gXVTsWqqxwe9xk9fba9Xv-2N0v7j_NYoq0DHDvByx2Q/edit?usp=sharing)**
+**[My Intro to Arduino Slide (Google Slides)](https://docs.google.com/presentation/d/1gXVTsWqqxwe9xk9fba9Xv-2N0v7j_NYoq0DHDvByx2Q/edit?usp=sharing)**, [PDF](https://github.com/7HE-W0R1D/Physical-Computing-Resources/blob/main/Intro%20to%20Arduino%20Slides/Interactive%20Art%20with%20Arduino_%20From%20Zero%20to%20One.pdf), [PPTX](https://github.com/7HE-W0R1D/Physical-Computing-Resources/blob/main/Intro%20to%20Arduino%20Slides/Interactive%20Art%20with%20Arduino_%20From%20Zero%20to%20One.pptx).
 
 For Arduino Code, check the [Grove Kit Code](https://github.com/7HE-W0R1D/Physical-Computing-Resources/tree/main/Grove%20Kit%20Code) folder.
 
