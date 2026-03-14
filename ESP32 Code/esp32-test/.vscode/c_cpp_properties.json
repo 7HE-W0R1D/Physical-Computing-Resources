@@ -3,7 +3,7 @@
     "configurations": [
         {
             "name": "Arduino",
-            "compilerPath": "/Users/berry/Library/Arduino15/packages/esp32/tools/esp-x32/2511/bin/xtensa-esp32-elf-g++",
+            "compilerPath": "/Users/breakfastberry/Library/Arduino15/packages/esp32/tools/esp-x32/2511/bin/xtensa-esp32-elf-g++",
             "compilerArgs": [
                 "-MMD",
                 "-w",
@@ -12,37 +12,35 @@
             ],
             "intelliSenseMode": "gcc-x64",
             "includePath": [
-                "/Users/berry/Documents/Arduino/esp32-test/esp32-radar",
-                "/Users/berry/Library/Arduino15/packages/esp32/tools/esp32-libs/3.3.7/qio_qspi/include",
-                "/Users/berry/Library/Arduino15/packages/esp32/hardware/esp32/3.3.7/cores/esp32",
-                "/Users/berry/Library/Arduino15/packages/esp32/hardware/esp32/3.3.7/variants/esp32",
-                "/Users/berry/Documents/Arduino/libraries/LD2420-main 2",
-                "/Users/berry/Library/Arduino15/packages/esp32/tools/esp-x32/2511/xtensa-esp-elf/include/c++/14.2.0",
-                "/Users/berry/Library/Arduino15/packages/esp32/tools/esp-x32/2511/xtensa-esp-elf/include/c++/14.2.0/xtensa-esp-elf/esp32",
-                "/Users/berry/Library/Arduino15/packages/esp32/tools/esp-x32/2511/xtensa-esp-elf/include/c++/14.2.0/backward",
-                "/Users/berry/Library/Arduino15/packages/esp32/tools/esp-x32/2511/lib/gcc/xtensa-esp-elf/14.2.0/include",
-                "/Users/berry/Library/Arduino15/packages/esp32/tools/esp-x32/2511/lib/gcc/xtensa-esp-elf/14.2.0/include-fixed",
-                "/Users/berry/Library/Arduino15/packages/esp32/tools/esp-x32/2511/xtensa-esp-elf/include"
+                "/Users/breakfastberry/Documents/Github/Physical-Computing-Resources/ESP32 Code/esp32-test/esp32-radar-light",
+                "/Users/breakfastberry/Library/Arduino15/packages/esp32/tools/esp32-libs/3.3.7/dio_qspi/include",
+                "/Users/breakfastberry/Library/Arduino15/packages/esp32/hardware/esp32/3.3.7/cores/esp32",
+                "/Users/breakfastberry/Library/Arduino15/packages/esp32/hardware/esp32/3.3.7/variants/lolin32-lite",
+                "/Users/breakfastberry/Documents/Arduino/libraries/LD2420-main",
+                "/Users/breakfastberry/Library/Arduino15/packages/esp32/tools/esp-x32/2511/xtensa-esp-elf/include/c++/14.2.0",
+                "/Users/breakfastberry/Library/Arduino15/packages/esp32/tools/esp-x32/2511/xtensa-esp-elf/include/c++/14.2.0/xtensa-esp-elf/esp32",
+                "/Users/breakfastberry/Library/Arduino15/packages/esp32/tools/esp-x32/2511/xtensa-esp-elf/include/c++/14.2.0/backward",
+                "/Users/breakfastberry/Library/Arduino15/packages/esp32/tools/esp-x32/2511/lib/gcc/xtensa-esp-elf/14.2.0/include",
+                "/Users/breakfastberry/Library/Arduino15/packages/esp32/tools/esp-x32/2511/lib/gcc/xtensa-esp-elf/14.2.0/include-fixed",
+                "/Users/breakfastberry/Library/Arduino15/packages/esp32/tools/esp-x32/2511/xtensa-esp-elf/include"
             ],
             "forcedInclude": [
-                "/Users/berry/Library/Arduino15/packages/esp32/hardware/esp32/3.3.7/cores/esp32/Arduino.h"
+                "/Users/breakfastberry/Library/Arduino15/packages/esp32/hardware/esp32/3.3.7/cores/esp32/Arduino.h"
             ],
             "cStandard": "c11",
             "cppStandard": "c++11",
             "defines": [
                 "F_CPU=240000000L",
                 "ARDUINO=10607",
-                "ARDUINO_ESP32_DEV",
+                "ARDUINO_LOLIN32_LITE",
                 "ARDUINO_ARCH_ESP32",
-                "ARDUINO_BOARD=\"ESP32_DEV\"",
-                "ARDUINO_VARIANT=\"esp32\"",
+                "ARDUINO_BOARD=\"LOLIN32_LITE\"",
+                "ARDUINO_VARIANT=\"lolin32-lite\"",
                 "ARDUINO_PARTITION_default",
                 "ARDUINO_HOST_OS=\"macosx\"",
-                "ARDUINO_FQBN=\"esp32:esp32:esp32:JTAGAdapter=default,PSRAM=disabled,PartitionScheme=default,CPUFreq=240,FlashMode=qio,FlashFreq=80,FlashSize=4M,UploadSpeed=921600,LoopCore=1,EventsCore=1,DebugLevel=none,EraseFlash=none,ZigbeeMode=default\"",
+                "ARDUINO_FQBN=\"esp32:esp32:lolin32-lite:FlashFreq=80,PartitionScheme=default,CPUFreq=240,UploadSpeed=115200,DebugLevel=none,EraseFlash=none\"",
                 "ESP32=ESP32",
                 "CORE_DEBUG_LEVEL=0",
-                "ARDUINO_RUNNING_CORE=1",
-                "ARDUINO_EVENT_RUNNING_CORE=1",
                 "ARDUINO_USB_CDC_ON_BOOT=0",
                 "__DBL_MIN_EXP__=(-1021)",
                 "__XCHAL_HAVE_FP=1",

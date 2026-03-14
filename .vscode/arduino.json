@@ -1,0 +1,7 @@
+{
+    "board": "esp32:esp32:lolin32-lite",
+    "configuration": "FlashFreq=80,PartitionScheme=default,CPUFreq=240,UploadSpeed=115200,DebugLevel=none,EraseFlash=all",
+    "programmer": "esptool",
+    "port": "/dev/tty.usbserial-20330",
+    "sketch": "ESP32 Code/esp32-test/esp32-twoway-serial/esp32-twoway-serial.ino"
+}

@@ -20,3 +20,6 @@ Notice how they expand the theme to the shaft, making it one part of the whole s
 ### Disruptive Devices
 From https://dl.acm.org/doi/10.1145/3386567.3388553
 <img width="1512" height="949" alt="Screenshot 2026-02-15 at 5 08 07 PM" src="https://github.com/user-attachments/assets/35cefc31-73bc-42e9-af7a-13a0900083af" />
+
+## Debugging Resources
+[ESP 32]()
