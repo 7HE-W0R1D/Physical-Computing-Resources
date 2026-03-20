@@ -1,0 +1,8 @@
+{
+    "configuration": "FlashFreq=80,PartitionScheme=default,CPUFreq=240,UploadSpeed=115200,DebugLevel=none,EraseFlash=none",
+    "board": "esp32:esp32:lolin32-lite",
+    "programmer": "esptool",
+    "port": "/dev/tty.usbserial-10",
+    "sketch": "esp32-test/esp32-radar-light/esp32-radar-light.ino",
+    "output": "build"
+}
