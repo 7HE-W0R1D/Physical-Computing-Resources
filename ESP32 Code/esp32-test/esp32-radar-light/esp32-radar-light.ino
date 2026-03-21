@@ -16,7 +16,7 @@ unsigned long lastPrintTime = 0;
 
 void setup() {
 
-  Serial.begin(9600);
+  Serial.begin(115200);
   delay(1000); 
   
   Serial.println("\n=== LD2420 Distance & LED Control ===");
@@ -64,9 +64,9 @@ void loop() {
       Serial.print(data.distance);
       Serial.println(" cm");
 
-      int safeDistance = constrain(data.distance, 0, 800);
+      int safeDistance = constrain(data.distance, 0, 400);
 
-      blinkInterval = map(safeDistance, 0, 800, 50, 2000);
+      blinkInterval = map(safeDistance, 0, 400, 5, 2000);
       
     } else {
       Serial.println("Radar Status -> No valid data yet");
