@@ -1,5 +1,4 @@
 #include <Arduino.h>
-#include <LD2420.h>
 #include "AudioTools.h"
 #include "AudioTools/Communication/A2DPStream.h"
 #include "TalkiePCM.h"
@@ -7,7 +6,6 @@
 #include "Vocab_US_Gemini.h"
 
 // Radar Configuration
-LD2420 radar;
 #define RX1_PIN 16
 #define TX1_PIN 17
 #define LED_PIN 22
@@ -30,7 +28,7 @@ unsigned long lastVoiceAlert = 0; // Cooldown timer for voice alerts
 // ---------- MULTI-THREADING (FreeRTOS) ----------
 // Variables shared between Core 0 (Radar/LED) and Core 1 (Bluetooth)
 volatile int currentDistance = 0;
-volatile LD2420_DetectionState currentState = LD2420_NO_DETECTION;
+volatile int currentState = 0; // 0 = OFF, 1 = ON
 volatile int currentBlinkInterval = 2000; // Shared LED blink interval
 
 // The background task that runs on Core 0 to prevent UART buffer lag and LED freeze
@@ -39,19 +37,32 @@ void radarUpdateTask(void * pvParameters) {
   bool ledState = false;
 
   for (;;) {
-    // 1. Update Radar
-    radar.update();
-    if (radar.isDataValid()) {
-      LD2420_Data data = radar.getCurrentData();
-      currentState = data.state;
-      currentDistance = data.distance;
+    // 1. Update Radar via Raw UART ASCII Parsing
+    while (Serial1.available()) {
+      String line = Serial1.readStringUntil('\n');
+      line.trim();
+      
+      if (line.startsWith("Range ")) {
+        int dist = line.substring(6).toInt();
+        currentDistance = dist;
+        currentState = 1;
+      } else if (line == "ON") {
+        currentState = 1;
+      } else if (line == "OFF") {
+        currentState = 0;
+        currentDistance = 0; // Reset
+      }
     }
 
     // 2. Handle LED Blinking (Never blocked by voice playback!)
     unsigned long currentLedMillis = millis();
     if (currentLedMillis - previousLedMillis >= currentBlinkInterval) {
       previousLedMillis = currentLedMillis;
-      ledState = !ledState;
+      if (currentBlinkInterval == 5000) {
+         ledState = LOW; // Turn off entirely if interval is 5000
+      } else {
+         ledState = !ledState;
+      }
       digitalWrite(LED_PIN, ledState);
     }
 
@@ -87,25 +98,20 @@ void setup() {
   pinMode(LED_PIN, OUTPUT);
   digitalWrite(LED_PIN, LOW);
 
-  // Initialize Radar
+  // Initialize Radar Serial
   Serial1.begin(115200, SERIAL_8N1, RX1_PIN, TX1_PIN);
-  if (radar.begin(Serial1)) {
-    Serial.println("LD2420 initialized successfully!");
-    
-    // Launch Radar Background Task on Core 0
-    xTaskCreatePinnedToCore(
-      radarUpdateTask,  // Function pointer
-      "RadarTask",      // Task name
-      4096,             // Stack size
-      NULL,             // Parameter
-      1,                // Priority
-      NULL,             // Task handle
-      0                 // Pin to Core 0 (default loop is Core 1)
-    );
-    Serial.println("Radar & LED background task started on Core 0.");
-  } else {
-    Serial.println("Warning: Failed to initialize radar...");
-  }
+  
+  // Launch Radar Background Task on Core 0
+  xTaskCreatePinnedToCore(
+    radarUpdateTask,  // Function pointer
+    "RadarTask",      // Task name
+    4096,             // Stack size
+    NULL,             // Parameter
+    1,                // Priority
+    NULL,             // Task handle
+    0                 // Pin to Core 0 (default loop is Core 1)
+  );
+  Serial.println("Radar native logging & LED background task started on Core 0.");
 
   // Initialize Audio Format Converter
   out.begin(from, to);
@@ -137,20 +143,24 @@ void loop() {
     
     // Copy the volatile variables locally so they don't change mid-execution
     int dist = currentDistance;
-    LD2420_DetectionState state = currentState;
+    int state = currentState;
       
     Serial.print("State: ");
-    Serial.print(state);
+    Serial.print(state == 1 ? "Active Detection" : "No Detection");
     Serial.print(" | Distance: ");
     Serial.print(dist);
     Serial.println(" cm");
 
-    int safeDistance = constrain(dist, 0, 400);
     // Update the shared variable so the background task knows how fast to blink
-    currentBlinkInterval = map(safeDistance, 0, 400, 5, 2000);
+    if (state == 0 || dist == 0) {
+       currentBlinkInterval = 5000; // Code for LED completely OFF and silence
+    } else {
+       int safeDistance = constrain(dist, 0, 400);
+       currentBlinkInterval = map(safeDistance, 0, 400, 5, 2000);
+    }
 
     // Check for human detection & handle voice alert cooldown
-    if (state == LD2420_DETECTION_ACTIVE && (millis() - lastVoiceAlert > 5000)) {
+    if (state == 1 && (millis() - lastVoiceAlert > 2000)) { // Changed to 2000 as requested previously
        lastVoiceAlert = millis();
        Serial.println("Triggering Voice Alert: DANGER & Distance");
        

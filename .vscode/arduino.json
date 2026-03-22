@@ -3,6 +3,6 @@
     "configuration": "FlashFreq=80,PartitionScheme=default,CPUFreq=240,UploadSpeed=115200,DebugLevel=none,EraseFlash=all",
     "programmer": "esptool",
     "port": "/dev/tty.usbserial-10",
-    "sketch": "ESP32 Code/esp32-test/esp32-as-ttl/esp32-as-ttl.ino",
+    "sketch": "ESP32 Code/esp32-radar-bt-sound/esp32-radar-bt-sound.ino",
     "output": "build"
 }
